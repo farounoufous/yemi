@@ -1,0 +1,30 @@
+# Dépendances (Ne jamais commiter)
+node_modules/
+jspm_packages/
+web_modules/
+
+# Fichiers de build / production
+dist/
+dist-ssr/
+*.local
+
+# Archives et sauvegardes lourdes
+*.rar
+*.zip
+*.7z
+*.tar.gz
+
+# Fichiers de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environnement et clés secrètes
+.env
+.env.local
+.env.*.local
+
+# Fichiers système
+.DS_Store
+Thumbs.db

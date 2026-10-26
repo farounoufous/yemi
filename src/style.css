@@ -1,0 +1,462 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   PALETTE « INK DOMINANT » — aplats uniquement, jamais de dégradé ni de halo
+   Proportions visées : Ink ~60 % · Smoke ~25 % · Mint ~10 % · Claret ~5 %
+
+   --p-*  : valeurs d'origine (ne changent jamais)
+   --c-*  : rôles lus par Tailwind (peuvent être permutés localement)
+   ===================================================================== */
+:root {
+  --p-ink: 15 17 16;        /* #0F1110 anthracite mat — fond dominant */
+  --p-ink-2: 23 27 25;      /* #171B19 Ink éclairci — surfaces et profondeur */
+  --p-smoke: 231 237 235;   /* #E7EDEB White Smoke — texte et sections claires */
+  --p-mint: 105 164 129;    /* #69A481 Mint — accent */
+  --p-claret: 124 31 49;    /* #7C1F31 Claret — rareté */
+
+  --c-ink: var(--p-ink);
+  --c-smoke: var(--p-smoke);
+  --c-mint: var(--p-mint);
+  --c-claret: var(--p-claret);
+
+  --expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem; /* les ancres ne passent plus sous le menu */
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ink font-sans text-smoke antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgb(var(--p-mint));
+    color: rgb(var(--p-ink));
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--p-mint));
+    outline-offset: 4px;
+  }
+  .theme-mint :focus-visible {
+    outline-color: rgb(var(--p-ink));
+  }
+}
+
+/* =====================================================================
+   RYTHME DES SECTIONS
+   Hero Ink → Bandeau Ink éclairci → À propos Ink → Parcours Smoke
+   → Projets Ink → Contact Mint (seul grand aplat Mint) → Pied Ink
+   Règles : le Mint en texte uniquement sur fond sombre ; le Claret jamais
+   en texte courant, jamais collé au Mint.
+   ===================================================================== */
+
+/* — Hero : Ink. Mint = cercle et titre ; Claret = pastille et carré. — */
+#top {
+  isolation: isolate;
+}
+
+/* Ondes discrètes qui se propagent depuis la composition de formes */
+#top::before,
+#top::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 6rem;
+  right: 1.5rem;
+  width: min(44vw, 400px);
+  aspect-ratio: 1;
+  border: 2px solid rgb(var(--p-smoke));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  animation: ripple 7s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+#top::after {
+  animation-delay: 3.5s;
+}
+@media (min-width: 768px) {
+  #top::before,
+  #top::after {
+    right: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  #top::before,
+  #top::after {
+    width: min(24vw, 400px);
+  }
+}
+
+/* — Bandeau des technologies : Ink éclairci, texte Smoke, losanges Mint — */
+[aria-label='Technologies utilisées'] {
+  background-color: rgb(var(--p-ink-2));
+  color: rgb(var(--p-smoke));
+  border-block: 1px solid rgb(var(--p-smoke) / 0.12);
+}
+[aria-label='Technologies utilisées'] .bg-claret {
+  background-color: rgb(var(--p-mint));
+}
+
+/* — À propos : Ink, avec un grand disque Ink éclairci qui respire derrière le texte — */
+#apropos {
+  position: relative;
+  isolation: isolate;
+  overflow: clip; /* clip (et non hidden) : le sticky de la colonne gauche reste actif */
+  background-color: rgb(var(--p-ink));
+}
+#apropos::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 8%;
+  right: -18vw;
+  width: min(70vw, 720px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: rgb(var(--p-ink-2));
+  animation: blob 20s ease-in-out infinite;
+}
+
+/* — Parcours (Smoke), Projets (Ink), Contact (Mint) :
+     chaque section recouvre la précédente avec un coin arrondi — */
+#parcours,
+#projets,
+.theme-mint {
+  position: relative;
+  margin-top: -2.5rem;
+  border-radius: 2.5rem 2.5rem 0 0;
+}
+
+/* — Parcours : l'étape en cours reste Mint (accent porteur de sens),
+     les deux autres passent en Ink / Ink éclairci — */
+#parcours li:nth-of-type(2) {
+  --c-claret: var(--p-ink); /* pastille et puce en Ink */
+}
+#parcours li:nth-of-type(2) > div {
+  background-color: rgb(var(--p-ink-2));
+}
+
+/* — Projets : fond Ink. Cartes 1 et 4 en Ink éclairci (accents Mint),
+     carte 2 en Claret (l'unique exception), carte 3 en Smoke — */
+.stack-card:is(:nth-child(1), :nth-child(4)) article {
+  background-color: rgb(var(--p-ink-2));
+  color: rgb(var(--p-smoke));
+}
+.stack-card:is(:nth-child(1), :nth-child(4)) article .text-ink\/75 {
+  color: rgb(var(--p-smoke) / 0.7);
+}
+.stack-card:is(:nth-child(1), :nth-child(4)) article header > span {
+  color: rgb(var(--p-mint));
+}
+.stack-card:is(:nth-child(1), :nth-child(4)) article ul li {
+  border-color: rgb(var(--p-mint));
+  color: rgb(var(--p-mint));
+}
+.stack-card:is(:nth-child(1), :nth-child(4)) article ul li:hover {
+  background-color: rgb(var(--p-mint));
+  color: rgb(var(--p-ink));
+}
+.stack-card:nth-child(3) {
+  --c-claret: var(--p-ink); /* bloc d'impact en Ink plutôt qu'en Claret */
+}
+
+/* — Contact : le seul grand aplat Mint. Tout ce qui était Claret passe en Ink. — */
+.theme-mint .text-claret {
+  color: rgb(var(--p-ink) / 0.55);
+}
+.theme-mint .animate-spin-medium,
+#contact .rotate-45 {
+  background-color: rgb(var(--p-ink));
+}
+#contact .peer:focus {
+  border-color: rgb(var(--p-ink));
+}
+#contact .peer:focus ~ label {
+  color: rgb(var(--p-ink));
+}
+
+/* =====================================================================
+   TRANSITIONS FLUIDES
+   Une seule courbe « expo » pour tout le site + durées plus longues
+   ===================================================================== */
+[class*='transition'] {
+  transition-timing-function: var(--expo);
+}
+.duration-300 {
+  transition-duration: 450ms;
+}
+.duration-500 {
+  transition-duration: 800ms;
+}
+
+/* =====================================================================
+   APPARITION AU SCROLL (directive v-reveal)
+   ===================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 44px, 0);
+  transition:
+    opacity 1.1s var(--expo),
+    transform 1.3s var(--expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* « grow » : le trait du parcours se dessine de haut en bas */
+.reveal.reveal--grow {
+  opacity: 1;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 2.2s var(--expo);
+}
+.reveal.reveal--grow.is-visible {
+  transform: scaleY(1);
+}
+
+/* « pop » : le bloc monte, se redresse et s'agrandit légèrement.
+   (Pas de clip-path ici : un élément entièrement rogné n'est jamais « visible »
+   pour l'IntersectionObserver, il ne se révélerait donc jamais.) */
+.reveal.reveal--pop {
+  opacity: 0;
+  transform: translate3d(0, 80px, 0) scale(0.9) rotate(-2deg);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.8s var(--expo),
+    transform 1.5s var(--expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.reveal--pop.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0);
+}
+
+/* =====================================================================
+   ENTRÉE DU HERO
+   ===================================================================== */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.line-rise {
+  display: block;
+  transform: translate3d(0, 110%, 0) skewY(7deg);
+  transform-origin: left bottom;
+  animation: rise 1.5s var(--expo) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.fade-in {
+  opacity: 0;
+  animation: fade 1.2s var(--expo) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* =====================================================================
+   MOUVEMENTS CONTINUS
+   On redéfinit les classes animate-* de Tailwind avec des trajectoires plus vivantes.
+   ===================================================================== */
+.animate-float {
+  animation: drift 9s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: sway 11s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: snap-spin 9s cubic-bezier(0.7, 0, 0.2, 1) infinite;
+}
+.animate-spin-medium {
+  animation: snap-spin 6s cubic-bezier(0.7, 0, 0.2, 1) infinite;
+}
+.animate-marquee {
+  animation: marquee-x 38s linear infinite;
+}
+
+/* Parallaxe souris (propriété `translate`, indépendante des animations) */
+.parallax {
+  translate: calc(var(--mx, 0) * var(--d, 20) * 1px) calc(var(--my, 0) * var(--d, 20) * 1px);
+  transition: translate 0.9s var(--expo);
+}
+
+/* =====================================================================
+   CARTES PROJETS EMPILÉES (grands écrans)
+   ===================================================================== */
+/* Empilement (sticky) désactivé : avec les captures, chaque carte dépasse la hauteur
+   de l'écran et sa fin (description, impact) serait masquée par la carte suivante.
+   Les cartes défilent donc normalement et gardent leur effet d'apparition. */
+.stack-card {
+  position: static;
+}
+
+/* =====================================================================
+   KEYFRAMES
+   ===================================================================== */
+@keyframes rise {
+  to {
+    transform: translate3d(0, 0, 0) skewY(0);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+/* le cercle dérive et se déforme légèrement, comme une goutte */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    border-radius: 50%;
+  }
+  25% {
+    transform: translate3d(14px, -22px, 0) scale(1.04);
+    border-radius: 54% 46% 50% 50% / 48% 54% 46% 52%;
+  }
+  50% {
+    transform: translate3d(-8px, -34px, 0) scale(0.97);
+    border-radius: 46% 54% 52% 48% / 54% 46% 54% 46%;
+  }
+  75% {
+    transform: translate3d(-18px, -12px, 0) scale(1.03);
+    border-radius: 52% 48% 46% 54% / 46% 52% 48% 54%;
+  }
+}
+/* l'anneau oscille et respire */
+@keyframes sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12px, 18px, 0) scale(1.14);
+  }
+}
+/* le carré tourne par quarts de tour nets, avec une pause entre chaque */
+@keyframes snap-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+@keyframes marquee-x {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes ripple {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes blob {
+  0%,
+  100% {
+    border-radius: 50%;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  33% {
+    border-radius: 58% 42% 47% 53% / 46% 56% 44% 54%;
+    transform: translate3d(-4vw, 3vw, 0) rotate(60deg);
+  }
+  66% {
+    border-radius: 44% 56% 55% 45% / 55% 44% 56% 45%;
+    transform: translate3d(2vw, -3vw, 0) rotate(120deg);
+  }
+}
+
+/* =====================================================================
+   ANIMATIONS LIÉES AU SCROLL (navigateurs compatibles uniquement)
+   Le titre du hero s'éloigne et les formes tournent pendant le défilement.
+   ===================================================================== */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #top h1 {
+      transform-origin: left bottom;
+      animation: hero-leave linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 85vh;
+    }
+    #top .parallax {
+      animation: shapes-turn linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100vh;
+    }
+    @keyframes hero-leave {
+      to {
+        transform: translate3d(0, -10vh, 0) scale(0.94);
+      }
+    }
+    @keyframes shapes-turn {
+      to {
+        rotate: 40deg;
+      }
+    }
+  }
+}
+
+/* =====================================================================
+   MOUVEMENT RÉDUIT
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.reveal--pop,
+  .line-rise,
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    animation: none;
+    transition: none;
+  }
+  .reveal.reveal--grow {
+    transform: none;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-spin-slow,
+  .animate-spin-medium,
+  .animate-marquee,
+  #apropos::before {
+    animation: none;
+  }
+  #top::before,
+  #top::after {
+    display: none;
+  }
+  .parallax {
+    translate: none;
+  }
+}
