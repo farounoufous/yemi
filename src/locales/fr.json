@@ -1,0 +1,40 @@
+{
+  "nav": { "logo": "Portfolio", "about": "À Propos", "skills": "Compétences", "projects": "Projets", "contact": "Contact", "cv": "Télécharger CV" },
+  "hero": {
+    "location": "Cotonou, Benin",
+    "title": "Développeuse",
+    "desc": "Développeuse Full Stack avec une solide expérience dans la conception et le développement d’applications web et mobiles.",
+    "work": "Voir Mes projets", "contact": "Me Contacter", "cv": "Télécharger CV",
+    "github": "GitHub", "linkedin": "LinkedIn"
+  },
+  "about": {
+    "title": "À Propos de Moi", "role": "Développeuse", "status": "Ouverte aux collaborations et aux projets",
+    "portfolio": "Portfolio",
+    "text": "Ici vous rencontrerez une développeuse qui aime profondément ce qu’elle fait. Pour moi, notre secteur est un terrain de jeu qui bouge sans cesse : c’est pourquoi je cherche toujours à apprendre et à me dépasser. Au-delà des lignes de code, vous découvrirez une personne entière, calme, guidée par une curiosité insatiable et une envie profonde de bien faire. Au quotidien, j’aborde la tech avec beaucoup de rigueur et d’autonomie, mais ce que j’aime par-dessus tout, c’est ce sentiment de liberté quand je crée une application robuste à partir d’une simple idée. Cette étincelle, c’est la même qui m’anime lorsque je me lance dans l’aventure de l’entrepreneuriat ou que je cherche à me dépasser en perfectionnant mon anglais. Et pour nourrir toute cette énergie, je m’évade régulièrement dans l’univers vibrant de la musique, principalement de la K-pop, une culture dont la créativité m’inspire bien plus souvent qu’on ne le croit.",
+    "location": "Localisation", "locationValue": "Cotonou, Benin", "email": "E-mail", "phone": "Téléphone"
+  },
+  "skills": { "title": "Compétences et Expertise", "tech": "Technologies", "advanced": "Avancé", "intermediate": "Intermédiaire" },
+  "projects": {
+    "title": "Projets sélectionnés", "more": "+{n} plus", "details": "Voir Détails", "tech": "Technologies", "links": "Liens", "close": "Fermer",
+    "items": {
+      "wifidrop": { "title": "Partage de fichiers", "desc": "Solution web pour transférer des fichiers lourds d’un appareil à un autre via le wifi, sans consommer de données mobiles." },
+      "subline": { "title": "Plateforme de sous-titrage", "desc": "Application web qui génère des sous-titres pour des vidéos locales grâce à Whisper, directement dans le navigateur et hors-ligne, avec export .srt/.vtt." },
+      "modulive": { "title": "Site e-commerce", "desc": "Boutique e-commerce de meubles en Vue.js" },
+      "codeduel": { "title": "Jeu interactif", "desc": "Jeu de quiz interactif en ligne" },
+      "clearway": { "title": "Signalement de voies bloquées", "desc": "PWA citoyenne qui permet aux habitants du Bénin de signaler et de confirmer les routes bloquées." }
+    }
+  },
+  "devices": { "desktop": "Ordinateur de bureau", "mobile": "Mobile" },
+  "contact": {
+    "badge": "Contact", "title": "Entrez en Contact", "subtitle": "Vous avez un projet en tête ? Travaillons ensemble pour créer quelque chose d’incroyable.",
+    "name": "Nom", "namePh": "Votre nom", "email": "E-mail", "phone": "Téléphone", "phonePh": "Votre numéro de téléphone",
+    "subject": "Sujet", "subjectPh": "De quoi s’agit-il ?", "message": "Message", "messagePh": "Votre message...", "send": "Envoyer le message"
+  },
+    "footer": {
+    "tagline": "Développeuse Full Stack. Je transforme vos idées en applications fiables et élégantes.",
+    "nav": "Navigation",
+    "contact": "Contact",
+    "rights": "© {year} Yemi. Tous droits réservés.",
+    "top": "Retour en haut"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "nav": { "logo": "Portfolio", "about ": "About", "skills": "Skills", "projects": "Projects", "contact": "Contact", "cv": "Download CV" },
+  "hero": {
+    "location": "Cotonou, Benin",
+    "title": "Fullstack Dev",
+    "desc": "Full Stack developer with solid experience designing and building web and mobile applications.",
+    "work": "See My Projects", "contact": "Contact Me", "cv": "Download CV",
+    "github": "GitHub", "linkedin": "LinkedIn"
+  },
+  "about": {
+    "title": "About Me", "role": "Developer", "status": "Open to collaborations and projects",
+    "portfolio": "Portfolio",
+    "text": "Here you will meet a developer who deeply loves what she does. To me, our field is a playground that never stops moving, which is why I am always looking to learn and push myself further. Beyond the lines of code, you will discover a whole person, calm and guided by an insatiable curiosity and a deep desire to do things well. Day to day, I approach tech with a lot of rigor and independence, but what I love most is the feeling of freedom when I build a robust application from a simple idea. That same spark drives me when I venture into entrepreneurship or work on improving my English. And to fuel all this energy, I regularly escape into the vibrant world of music, mainly K-pop, a culture whose creativity inspires me far more often than people might think.",
+    "location": "Location", "locationValue": "Cotonou, Benin", "email": "Email", "phone": "Phone"
+  },
+  "skills": { "title": "Skills and Expertise", "tech": "Technologies", "advanced": "Advanced", "intermediate": "Intermediate" },
+  "projects": {
+    "title": "Featured Projects", "more": "+{n} more", "details": "View Details", "tech": "Technologies", "links": "Links", "close": "Close",
+    "items": {
+      "shop": { "title": "Online Store", "desc": "Project description to replace. Present the context, your role and the result." },
+      "school": { "title": "School Platform", "desc": "Project description to replace. Present the context, your role and the result." },
+      "stock": { "title": "Stock & Sales Management", "desc": "Project description to replace. Present the context, your role and the result." },
+      "ai": { "title": "Smart Platform", "desc": "Project description to replace. Present the context, your role and the result." }
+    }
+  },
+  "devices": { "desktop": "Desktop", "mobile": "Mobile" },
+  "contact": {
+    "badge": "Contact", "title": "Get in Touch", "subtitle": "Have a project in mind? Let’s work together to build something amazing.",
+    "name": "Name", "namePh": "Your name", "email": "Email", "phone": "Phone", "phonePh": "Your phone number",
+    "subject": "Subject", "subjectPh": "What is it about?", "message": "Message", "messagePh": "Your message...", "send": "Send message"
+  },
+    "footer": {
+    "tagline": "Full Stack developer. I turn your ideas into reliable, elegant applications.",
+    "nav": "Navigation",
+    "contact": "Contact",
+    "rights": "© {year} Yemi. All rights reserved.",
+    "top": "Back to top"
+  }
+}

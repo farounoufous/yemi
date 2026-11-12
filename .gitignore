@@ -1,30 +1,28 @@
-# Dépendances (Ne jamais commiter)
-node_modules/
-jspm_packages/
-web_modules/
+# Dépendances
+node_modules
 
-# Fichiers de build / production
-dist/
-dist-ssr/
-*.local
+# Build
+dist
+dist-ssr
 
-# Archives et sauvegardes lourdes
-*.rar
-*.zip
-*.7z
-*.tar.gz
+# Vercel
+.vercel
 
-# Fichiers de log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Environnement et clés secrètes
+# Variables d'environnement (mots de passe, clés)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# Fichiers système
+# Journaux
+logs
+*.log
+npm-debug.log*
+
+# Éditeurs et système
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
 Thumbs.db
+*.suo
+*.sw?

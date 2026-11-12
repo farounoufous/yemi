@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import '@fontsource-variable/geist'
-import './style.css'
 import App from './App.vue'
-import { reveal } from './directives/reveal'
+import router from './router'
+import i18n from './i18n'
+import './style.css'
 
-createApp(App).directive('reveal', reveal).mount('#app')
+createApp(App).use(router).use(i18n).mount('#app')

@@ -1,35 +1,30 @@
 <script setup>
-import ProjectCard from './ProjectCard.vue'
-import SectionLabel from './SectionLabel.vue'
-import { projects } from '../data/content'
-
-// Répartition des couleurs sur les quatre études de cas
-const tones = ['mint', 'claret', 'smoke', 'mint']
+import { useI18n } from 'vue-i18n'
+import Icon from './Icon.vue'
+import Shot from './Shot.vue'
+import { projects, slidesOf } from '../data/portfolio'
+const { t } = useI18n()
 </script>
 
 <template>
-  <section id="projets" class="bg-ink text-smoke">
-    <div class="mx-auto max-w-6xl px-6 pb-28 pt-28 md:px-10 md:pb-40 md:pt-40">
-      <SectionLabel v-reveal n="03" text="Projets sélectionnés" tone="ink" />
-      <h2
-        v-reveal="{ delay: 100 }"
-        class="mt-8 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl"
-      >
-        Quatre études de cas, <span class="text-mint">de la contrainte à la solution.</span>
-      </h2>
-
-      <div class="mt-16 md:mt-24">
-        <!-- Sur grand écran, chaque carte vient recouvrir la précédente (sticky) -->
-        <div
-          v-for="(p, i) in projects"
-          :key="p.index"
-          class="stack-card mb-8 last:mb-0 lg:mb-[12vh] lg:last:mb-0"
-          :style="{ '--i': i }"
-        >
-          <div v-reveal="{ variant: 'pop' }">
-            <ProjectCard :project="p" :tone="tones[i]" />
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t('projects.title') }}</h2>
+      <div class="grid">
+        <router-link v-for="p in projects" :key="p.id" class="card project" :to="{ name: 'project', params: { id: p.id } }">
+          <div class="cover">
+            <Shot :project="p" :slide="slidesOf(p)[0]" :title="t(`projects.items.${p.id}.title`)" />
+            <span class="overlay-btn"><Icon name="eye" :size="18" />{{ t('projects.details') }}</span>
           </div>
-        </div>
+          <div class="p-body">
+            <h3>{{ t(`projects.items.${p.id}.title`) }}</h3>
+            <div class="tags">
+              <span v-for="tag in p.tags.slice(0, 3)" :key="tag" class="tag">{{ tag }}</span>
+              <span v-if="p.tags.length > 3" class="more">{{ t('projects.more', { n: p.tags.length - 3 }) }}</span>
+            </div>
+            <p class="muted clamp">{{ t(`projects.items.${p.id}.desc`) }}</p>
+          </div>
+        </router-link>
       </div>
     </div>
   </section>
